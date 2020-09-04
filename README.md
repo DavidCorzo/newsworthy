@@ -1,8 +1,8 @@
 # NewsWorthy
 
 ## Miembros del equipo
-- Anesveth Maatens
 - David Corzo
+- Anesveth Maatens
 - Ian Jenatz
 - Steven Wilson
 
