@@ -22,8 +22,8 @@ Utilizaremos Beautiful Soup, un paquete de Python para hacer el parsing de websi
 Por medio de [Trello](https://trello.com/b/AltERita/grupo1) se estarán organizando las tareas del proyecto. 
 
 ## Testing:
-- Unit testing:
-- CI: 
+- Unit testing
+- CI
 
 ## Llamadas API
 - GET: Estas llamadas serían dirigidas hacia el API de una página de Noticias de la cual se sacarán todas las noticias.
