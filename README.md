@@ -12,13 +12,14 @@ NewsWorthy es un aplicación web construida con el framework de Flask para Pytho
 
 Utilizaremos Beautiful Soup, un paquete de Python para hacer el parsing de websites de noticias para crear cards con las noticias más relevantes.
 
-Por medio de [Trello](https://trello.com/b/AltERita/grupo1) se estarán organizando las tareas del proyecto. 
-
 ## Características
 - Estilo de cartas impreso.
 - Recomendaciones personalizadas al usuario.
 - GUI intuitiva.
 - Noticieros importantes afiliados.
+
+
+Por medio de [Trello](https://trello.com/b/AltERita/grupo1) se estarán organizando las tareas del proyecto. 
 
 ## Testing:
 - Unit testing:
