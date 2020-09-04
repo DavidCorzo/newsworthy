@@ -24,3 +24,8 @@ Por medio de [Trello](https://trello.com/b/AltERita/grupo1) se estarán organiza
 ## Testing:
 - Unit testing:
 - CI: 
+
+## Llamadas API
+- GET: Estas llamadas serían dirigidas hacia el API de una página de Noticias de la cual se sacarán todas las noticias.
+- POST: Estas llamadas serían las responsables de crear las tarjetas en la cual se presentan las noticias, y serían creadas de forma dinámica.
+- DELETE: Estas llamadas serían responsables de eliminar las noticias que no le interesen al usuario, a través de un botón.
