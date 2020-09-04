@@ -1,6 +1,6 @@
 # NewsWorthy
 
-## Team Members
+## Miembros del equipo
 - Anesveth Maatens
 - David Corzo
 - Ian Jenatz
