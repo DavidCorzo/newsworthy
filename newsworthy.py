@@ -20,9 +20,6 @@ news_content = []
 
 @app.route("/", methods=["GET", "POST", "DELETE"])  # main card view page
 def View():
-    # cards.append(1)
-    # cards.append(2)
-
     if request.method == "POST":
         if "AddFilters" in request.form:
             topics = request.form["exampleInputEmail1"]
@@ -33,6 +30,9 @@ def View():
                 print(i)
         else:
             pass
+    elif request.method == "DELETE":
+        if "RemoveCard" in request.form:
+            pass # hacer algo para quitar carta de news_content
     return render_template(
         "index.html",
         news_array = news_content
