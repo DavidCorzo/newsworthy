@@ -2,35 +2,71 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Responsive Cards UI Design</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Responsive Cards UI Design</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 <ul style="column-count: 3; column-gap: 1rem; display: block; padding-bottom: 1%; padding-top: 2%;">
-{% for i in news_list %}
-<div class="wrapper">
-    <div class="cards_wrap" style="width: 320%; display: inline-block;">
-      <div class="card_item">
-        <div class="card_inner">
-          <div class="card_top">
-            <img src="{{ i.url_to_image }}" alt="car" />
-          </div>
-          <div class="card_bottom">
-            <div class="card_info">
-              <p class="title"> {{ i.title }} </p>
-              <p>
-                {{ i.description }}
-              </p>
+{% for topic in news_list %}
+  {% set name = topics_list[loop.index-1] %}
+  <h1>{{ name }}</h1>
+  {% for i in topic %}
+    <div class="wrapper">
+      <div class="cards_wrap" style="width: 320%; display: inline-block;">
+        <div class="card_item">
+          <div class="card_inner">
+            <div class="card_top">
+              <img src="{{ i.url_to_image }}" alt="car" />
             </div>
-            <div class="card_creator">
-              By {{ i.author if (i.author != None) else i.name }}
+            <div class="card_bottom">
+              <div class="card_info">
+                <p class="title"> {{ i.title }} </p>
+                <p>
+                  {{ i.description }}
+                </p>
+              </div>
+              <div class="card_bottom">
+                <div class="card_info">
+                  <p class="title"> {{ i.title }} </p>
+                  <p>
+                    {{ i.description }}
+                  </p>
+                </div>
+                <div class="card_creator">
+                  By {{ i.author if (i.author != None) else i.name }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endfor %}
 {% endfor %}
 </ul>
+
+<div>
+  <h1> Enter 5 News Topics</h1>
+  <form action="/" method="POST">
+    <div class="form-group">
+      <label for="1topic">First Topic</label>
+      <input type="text" class="form-control" id="1topic" name="firstTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+      <label for="2topic">Second Topic</label>
+      <input type="text" class="form-control" id="2topic" name="secondTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+      <label for="3topic">Third Topic</label>
+      <input type="text" class="form-control" id="3topic" name="thirdTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+      <label for="4topic">Fourth Topic</label>
+      <input type="text" class="form-control" id="4topic" name="fourthTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+      <label for="5topic">Fifth Topic</label>
+      <input type="text" class="form-control" id="5topic" name="fifthTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+
+    </div>
+    
+    <button id="AddFilters" name="AddFilters" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
 </body>
 </html>
