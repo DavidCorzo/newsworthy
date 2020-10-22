@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Responsive Cards UI Design</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+{% for i in news_list %}
+<div class="wrapper">
+    <div class="cards_wrap">
+      <div class="card_item">
+        <div class="card_inner">
+          <div class="card_top">
+            <img src="{{ i.url_to_image }}" alt="car" />
+          </div>
+          <div class="card_bottom">
+            <div class="card_info">
+              <p class="title"> {{ i.title }} </p>
+              <p>
+                {{ i.description }}
+              </p>
+            </div>
+            <div class="card_creator">
+              By {{ i.author if (i.author != None) else i.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</body>
+</html>
