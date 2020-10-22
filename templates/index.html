@@ -26,16 +26,8 @@
                   {{ i.description }}
                 </p>
               </div>
-              <div class="card_bottom">
-                <div class="card_info">
-                  <p class="title"> {{ i.title }} </p>
-                  <p>
-                    {{ i.description }}
-                  </p>
-                </div>
-                <div class="card_creator">
-                  By {{ i.author if (i.author != None) else i.name }}
-                </div>
+              <div class="card_creator">
+                By {{ i.author if (i.author != None) else i.name }}
               </div>
             </div>
           </div>
