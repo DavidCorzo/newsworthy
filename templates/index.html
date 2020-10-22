@@ -6,10 +6,10 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
+<ul style="column-count: 3; column-gap: 1rem; display: block; padding-bottom: 1%; padding-top: 2%;">
 {% for i in news_list %}
 <div class="wrapper">
-    <div class="cards_wrap">
+    <div class="cards_wrap" style="width: 320%; display: inline-block;">
       <div class="card_item">
         <div class="card_inner">
           <div class="card_top">
@@ -31,5 +31,6 @@
     </div>
   </div>
 {% endfor %}
+</ul>
 </body>
 </html>
