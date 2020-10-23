@@ -3,6 +3,7 @@ from news import News
 from requests import get
 from json import loads
 from flask import Flask, render_template, request
+from datetime import date, timedelta
 
 app = Flask(__name__)
 app.static_folder = "static"
@@ -18,7 +19,9 @@ def getRequests(arr):
 
     for i in arr:
         print(i)
-        url = "http://newsapi.org/v2/top-headlines?q=%s&from=2020-09-24&sortBy=publishedAt&apiKey=537a36338c1e4d119f54dfec8f08ba9b" % i
+        max_date = date.today()
+        print(max_date)
+        url = f"http://newsapi.org/v2/top-headlines?q={i}&from={max_date}&sortBy=publishedAt&apiKey=676d572fbac34973aeb551e96828d0e9"
 
         print(url)
 

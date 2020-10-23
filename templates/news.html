@@ -53,20 +53,20 @@
           <div class="form-group">
             <label for="1topic">First Topic</label>
             <input type="text" class="form-control" id="1topic" name="firstTopic" aria-describedby="emailHelp"
-              placeholder="Enter topic">
+              placeholder="Enter topic" required>
 
             <label for="2topic">Second Topic</label>
             <input type="text" class="form-control" id="2topic" name="secondTopic" aria-describedby="emailHelp"
-              placeholder="Enter topic">
+              placeholder="Enter topic" required>
 
             <label for="3topic">Third Topic</label>
-            <input type="text" class="form-control" id="3topic" name="thirdTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+            <input type="text" class="form-control" id="3topic" name="thirdTopic" aria-describedby="emailHelp" placeholder="Enter topic" required>
             
             <label for="4topic">Fourth Topic</label>
-            <input type="text" class="form-control" id="4topic" name="fourthTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+            <input type="text" class="form-control" id="4topic" name="fourthTopic" aria-describedby="emailHelp" placeholder="Enter topic" required>
             
             <label for="5topic">Fifth Topic</label>
-            <input type="text" class="form-control" id="5topic" name="fifthTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+            <input type="text" class="form-control" id="5topic" name="fifthTopic" aria-describedby="emailHelp" placeholder="Enter topic" required>
 
           </div>
           <!-- <div class="form-group">
@@ -82,41 +82,33 @@
     <div class="album py-5 bg-light">
       <div class="container">
         {% for topic in news_list %}
-            {% set name = topics_list[loop.index-1] %}
-            <form action="/news" method="POST">
-              <input type="hidden" id="deleteTopic" name="deleteTopic" value="{{ name }}" />
-              <h1><button id="RemoveTopic" name="RemoveTopic">{{ name }}</button></h1>   
-            </form>
-            <br>
-            <div class="row">
-            {% for i in topic %}
-
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img style="height:150px;width:100%;" src="{{ i.url_to_image }}" alt="image" />
-                  </svg>
-                  <div class="card-body">
-                    <p class="card-text">{{ i.title }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </div>
-                      <small class="text-muted">By {{ i.author if (i.author != None) else i.name }}</small>
+          {% set name = topics_list[loop.index-1] %}
+          <form action="/news" method="POST">
+            <input type="hidden" id="deleteTopic" name="deleteTopic" value="{{ name }}" />
+            <h1><button id="RemoveTopic" name="RemoveTopic">{{ name }}</button></h1>   
+          </form>
+          <br>
+          <div class="row">
+          {% for i in topic %}
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                  <img style="height:50%;width:100%;" src="{{ i.url_to_image }}" alt="image" />
+                </svg>
+                <div class="card-body">
+                  <p class="card-text">{{ i.title }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" onclick="window.location.href='{{ i.url }}'" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                     </div>
+                    <small class="text-muted">By {{ i.author if (i.author != None) else i.name }}</small>
                   </div>
                 </div>
               </div>
-            {% endfor %}
+            </div>
           {% endfor %}
-
-          
-
-
-
-                
           </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
 
