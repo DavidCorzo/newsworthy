@@ -19,9 +19,9 @@ def getRequests(arr):
 
     for i in arr:
         print(i)
-        max_date = date.today()
-        print(max_date)
-        url = f"http://newsapi.org/v2/top-headlines?q={i}&from={max_date}&sortBy=publishedAt&apiKey=676d572fbac34973aeb551e96828d0e9"
+        # max_date = date.today()
+        # print(max_date)
+        url = f"http://newsapi.org/v2/top-headlines?q={i}&from=2020-09-24&sortBy=publishedAt&apiKey=676d572fbac34973aeb551e96828d0e9"
 
         print(url)
 
