@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v4.1.1">
+  <title>Album example · Bootstrap</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
+
+  <!-- Bootstrap core CSS -->
+  <link href="static\css\bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="static\css\album.css" rel="stylesheet"> -->
+  <!-- <link href="static\css\cover.css" rel="stylesheet"> -->
+</head>
+
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+
+      {% include 'includes/_navbar.html' %}
+
+    </header>
+  </div>
+
+  <main role="main">
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1>Add Keywords</h1>
+        <form action="/news" method="POST">
+          <div class="form-group">
+            <label for="1topic">First Topic</label>
+            <input type="text" class="form-control" id="1topic" name="firstTopic" aria-describedby="emailHelp"
+              placeholder="Enter topic">
+
+            <label for="2topic">Second Topic</label>
+            <input type="text" class="form-control" id="2topic" name="secondTopic" aria-describedby="emailHelp"
+              placeholder="Enter topic">
+
+            <label for="3topic">Third Topic</label>
+            <input type="text" class="form-control" id="3topic" name="thirdTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+            
+            <label for="4topic">Fourth Topic</label>
+            <input type="text" class="form-control" id="4topic" name="fourthTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+            
+            <label for="5topic">Fifth Topic</label>
+            <input type="text" class="form-control" id="5topic" name="fifthTopic" aria-describedby="emailHelp" placeholder="Enter topic">
+
+          </div>
+          <!-- <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div> -->
+          <button id="AddFilters" name="AddFilters" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </section>
+
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        {% for topic in news_list %}
+            {% set name = topics_list[loop.index-1] %}
+            <form action="/news" method="POST">
+              <input type="hidden" id="deleteTopic" name="deleteTopic" value="{{ name }}" />
+              <h1><button id="RemoveTopic" name="RemoveTopic">{{ name }}</button></h1>   
+            </form>
+            <br>
+            <div class="row">
+            {% for i in topic %}
+
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img style="height:150px;width:100%;" src="{{ i.url_to_image }}" alt="image" />
+                  </svg>
+                  <div class="card-body">
+                    <p class="card-text">{{ i.title }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-muted">By {{ i.author if (i.author != None) else i.name }}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endfor %}
+
+          
+
+
+
+                
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+      <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+      <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a
+          href="../getting-started/introduction/">getting started guide</a>.</p>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+  <script src="static\js\bootstrap.bundle.min.js"></script>
+
+</html>

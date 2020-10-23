@@ -1,52 +1,49 @@
-from flask import Flask, render_template, request
+import os
+from news import News
 from requests import get
 from json import loads
-from news import news
-import jinja2
+from flask import Flask, render_template, request
 
-# david's trash
-# #http://newsapi.org/v2/everything?q=bitcoin&from=2020-09-22&sortBy=publishedAt&apiKey=58e9f79801054ad698f961de67f7c258
-# page = get("http://newsapi.org/v2/top-headlines?country=us&apiKey=58e9f79801054ad698f961de67f7c258")
-# page.encoding = page.apparent_encoding
-# json_page = dict(loads(page.text))["articles"]
-# news_list = list()
-# for i in json_page:
-#     newNewsObject = news()
-#     newNewsObject.assign_attributes(i)
-#     news_list.append(newNewsObject)
-# # for i in news_list:
-# #     print(i)
-
-# start the api app.
 app = Flask(__name__)
 app.static_folder = "static"
 
-# ian's trash
-
-
-def getRequests(arr):
-    nested_arr = []
-    for i in arr:
-        print(i)
-        url = "http://newsapi.org/v2/top-headlines?q=%s&from=2020-09-24&sortBy=publishedAt&apiKey=537a36338c1e4d119f54dfec8f08ba9b" % i
-        print(url)
-        page = get(url)
-        page.encoding = page.apparent_encoding
-        json_page = dict(loads(page.text))["articles"]
-        news_list = list()
-        for i in json_page:
-            newNewsObject = news()
-            newNewsObject.assign_attributes(i)
-            news_list.append(newNewsObject)
-        nested_arr.append(news_list)
-    return nested_arr
-
+environment = os.getenv("ENVIRONMENT", "development")
 
 news_list = []
 topics_copy = []
 
 
-@app.route("/", methods=["GET", "POST", "DELETE"])  # main card view page
+def getRequests(arr):
+    nested_arr = []
+
+    for i in arr:
+        print(i)
+        url = "http://newsapi.org/v2/top-headlines?q=%s&from=2020-09-24&sortBy=publishedAt&apiKey=537a36338c1e4d119f54dfec8f08ba9b" % i
+
+        print(url)
+
+        page = get(url)
+        page.encoding = page.apparent_encoding
+        json_page = dict(loads(page.text))["articles"]
+        news_list = list()
+
+        for i in json_page:
+            newNewsObject = News()
+            newNewsObject.assign_attributes(i)
+            news_list.append(newNewsObject)
+        nested_arr.append(news_list)
+
+    # for i in news_list:
+    #     print(i)
+    return nested_arr
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/news", methods=["GET", "POST", "DELETE"])  # main card view page
 def run():
     if request.method == "POST":
         if "AddFilters" in request.form:
@@ -60,7 +57,6 @@ def run():
             content = getRequests(topics)
             for i in topics:
                 topics_copy.append(i)
-<<<<<<< HEAD
             for i in content:
                 news_list.append(i)
         
@@ -77,28 +73,18 @@ def run():
             pass
         
     
-=======
-
-            for i in content:
-                news_list.append(i)
-
-        else:
-            pass
-    elif request.method == "DELETE":
-        if "RemoveCard" in request.form:
-            pass  # hacer algo para quitar carta de news_content
-
->>>>>>> 1cb7eecab1b5c8cb6941646391ef9bf2dae173dc
     return render_template(
-        "index.html",
+        "news.html",
         news_list=news_list,
         topics_list=topics_copy
-    )
+        ) 
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-=======
 
->>>>>>> 1cb7eecab1b5c8cb6941646391ef9bf2dae173dc
-    app.run(debug=True)
+    debug = False
+
+    if environment == "development" or environment == "local":
+        debug = True
+
+    app.run(host="127.0.0.1", debug=debug)
