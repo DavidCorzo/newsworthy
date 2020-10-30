@@ -60,7 +60,6 @@ def run():
             content = getRequests(topics)
             for i in topics:
                 topics_copy.append(i)
-<<<<<<< HEAD
             for i in content:
                 news_list.append(i)
         
@@ -77,18 +76,6 @@ def run():
             pass
         
     
-=======
-
-            for i in content:
-                news_list.append(i)
-
-        else:
-            pass
-    elif request.method == "DELETE":
-        if "RemoveCard" in request.form:
-            pass  # hacer algo para quitar carta de news_content
-
->>>>>>> 1cb7eecab1b5c8cb6941646391ef9bf2dae173dc
     return render_template(
         "index.html",
         news_list=news_list,
@@ -97,8 +84,4 @@ def run():
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-=======
-
->>>>>>> 1cb7eecab1b5c8cb6941646391ef9bf2dae173dc
     app.run(debug=True)
