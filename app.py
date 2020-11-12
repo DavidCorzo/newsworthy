@@ -16,51 +16,24 @@ environment = os.getenv("ENVIRONMENT", "development")
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["newsflash_db"]
 
-# mycol = mydb["war"]
-# mycol.drop()
+# Methods -------------------------------------------------------------
+def printMDB():
+    print(mydb.list_collection_names())
+    return "Successful"
 
-# mycol = mydb["bitcoin"]
-# mycol.drop()
-
-# mycol = mydb["software"]
-# mycol.drop()
-
-# mycol = mydb["politics"]
-# mycol.drop()
-
-# mycol = mydb["finance"]
-# mycol.drop()
-
-print(mydb.list_collection_names())
-
-# for item in mydb.list_collection_names():
-#     mycol = mydb.get_collection(item)
-#     mycol.drop()
-
-# x = mycol.insert_many(mylist) # mycol.insert_one() for only one value
-
-
-
-# for item in mydb.list_collection_names():
-#     print(item)
-
-# x = mycol.delete_many({})
-
-# for item in mycol.find():
-#     print(item)
-
-news_list = []
-topics_copy = []
+def delMDB_Collections():
+    for item in mydb.list_collection_names():
+        mycol = mydb.get_collection(item)
+        mycol.drop()
+    return "Successful"
 
 def getRequests(arr):
     nested_arr = []
-
     for i in arr:
         print(i)
         # max_date = date.today()
         # print(max_date)
-        url = f"http://newsapi.org/v2/top-headlines?q={i}&from=2020-10-07&sortBy=publishedAt&apiKey=537a36338c1e4d119f54dfec8f08ba9b"
-
+        url = f"http://newsapi.org/v2/top-headlines?q={i}&from=2020-10-12&sortBy=publishedAt&apiKey=537a36338c1e4d119f54dfec8f08ba9b"
         print(url)
 
         page = get(url)
@@ -75,8 +48,6 @@ def getRequests(arr):
         nested_arr.append(request_list)
     return nested_arr
 
-
-
 def createCols(topics):
     for item in topics:
         col = mydb[f"{item}"]
@@ -84,9 +55,8 @@ def createCols(topics):
         z = col.delete_many({})
     for item in mydb.list_collection_names():
         print(item)
-    
+
 mylist = []
-nestedlist = []
 def addRequests(content):
     for item in content:
         nestedlist = []
@@ -119,7 +89,6 @@ def postDB(mylist): # Aqui esta el error, agrega la misma lista a cada uno
                 pass
         n+=1
 
-nested_news_list = []
 def getDB():
     news_list = []
     for i in mydb.list_collection_names():
@@ -149,6 +118,10 @@ def delDB():
     pass
 
 
+# Calling Methods -----------------------------------------------------
+printMDB()
+# delMDB_Collections()
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -176,6 +149,15 @@ def run():
         elif "RemoveTopic" in request.form:
             delete_val = request.form["deleteTopic"]
             mydb.get_collection(delete_val).drop()
+            topics_copy = getTopics()
+            index = 0
+            for topic in topics_copy:
+                if topic == delete_val:
+                    break
+                index+=1
+            
+            mylist.pop(index)
+            printMDB()
 
         else:
             pass
