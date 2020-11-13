@@ -76,7 +76,7 @@ def addRequests(content):
     return mylist
 
 temp = []
-def postDB(mylist): # Aqui esta el error, agrega la misma lista a cada uno
+def postDB(mylist):
     for item in mydb.list_collection_names():
         mycol = mydb.get_collection(item)
         temp.append(mycol)
@@ -114,8 +114,21 @@ def getTopics():
         topics_copy.append(item)
     return topics_copy
 
-def delDB():
-    pass
+def delDB(delete):
+    mydb.get_collection(delete).drop()
+    return "Successful"
+    
+def delTfromList(topics, delete):
+    index = 0
+    flag = 0
+    for topic in topics:
+        if topic == delete:
+            flag = 1
+            break
+        index+=1
+    if flag == 1:
+        mylist.pop(index)
+    return "Successful"
 
 
 # Calling Methods -----------------------------------------------------
@@ -126,7 +139,7 @@ printMDB()
 def index():
     return render_template("index.html")
 
-
+news_list = getDB()
 @app.route("/news", methods=["GET", "POST", "DELETE"])  # main card view page
 def run():
     if request.method == "POST":
@@ -148,19 +161,10 @@ def run():
         
         elif "RemoveTopic" in request.form:
             delete_val = request.form["deleteTopic"]
-            mydb.get_collection(delete_val).drop()
+            delDB(delete_val)
             topics_copy = getTopics()
-            index = 0
-            for topic in topics_copy:
-                if topic == delete_val:
-                    break
-                index+=1
-            
-            mylist.pop(index)
+            delTfromList(topics_copy, delete_val)
             printMDB()
-
-        else:
-            pass
     
     news_list = getDB()
     topics_copy = getTopics()
