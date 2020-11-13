@@ -33,7 +33,7 @@ def getRequests(arr):
         print(i)
         # max_date = date.today()
         # print(max_date)
-        url = f"http://newsapi.org/v2/top-headlines?q={i}&from=2020-10-12&sortBy=publishedAt&apiKey=537a36338c1e4d119f54dfec8f08ba9b"
+        url = f"http://newsapi.org/v2/top-headlines?q={i}&from=2020-10-14&sortBy=publishedAt&apiKey=537a36338c1e4d119f54dfec8f08ba9b"
         print(url)
 
         page = get(url)
@@ -55,6 +55,7 @@ def createCols(topics):
         z = col.delete_many({})
     for item in mydb.list_collection_names():
         print(item)
+    return "Successful"
 
 mylist = []
 def addRequests(content):
@@ -88,6 +89,7 @@ def postDB(mylist):
             except:
                 pass
         n+=1
+    return "Successful"
 
 def getDB():
     news_list = []
